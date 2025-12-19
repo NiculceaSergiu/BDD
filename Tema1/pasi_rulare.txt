@@ -1,0 +1,59 @@
+I) instalare si testare jdk
+- descarcare si dezarhivare: https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_windows-x64_bin.zip
+
+1) se compileaza in linie de comanda
+	cale_spre_compilator\javac.exe cale_spre_fisier_sursa.java
+(in caz de succes rezulta un fisier *.class)
+	
+2) se ruleaza in linie de comanda
+	cale_spre_interpretor_java\java.exe cale_spre_fisier_sursa
+	
+Obs. analog se ruleaza si cu jdk-16	
+
+II) instalare PostgreSQL
+- descarcare si instalare
+
+III) descarcam driver postgresql
+https://jdbc.postgresql.org/download/postgresql-42.2.24.jar
+
+IV) descarcam exemplu de pe gdrive
+	a) fisier Test.java
+		- observam conexiunea spre baza de date vanzari
+	b) descarcam baza de date vanzari si o restauram 
+		- cu PGAdmin cream o baza de date vanzari
+		- folosim ps_restore pentru restaurare vanzari.tar in bd vanzari
+			"c:\Program Files\PostgreSQL\13\bin\pg_restore.exe" -U postgres --dbname=vanzari vanzari.tar
+		(ignoram warninguri)
+		- din interfata PGAdmin se pot scrie interogari 
+		- interogarile din Test.java pot fi testate in primul rand pe interfata PGAdmin 
+Exemple interogari:
+-- lista clienti
+select * from client;
+
+-- numar clienti GOLD
+select count(*) from client where status='GOLD';	
+
+-- produse care contin "Tea" in denumire
+select * from product where name like '%Tea%'
+
+	c) editare Test.java 
+		- cel putin url, utilizator, parola 
+		- editam interogarea pe care o transmitem din Test.java catre PostgreSQL
+		
+	d) compilare (din director cu Test.java)
+		- utilizam driver de postgres 
+		javac Test.java
+		
+		
+	e) rulare (din director cu Test.java)
+		- utilizam driver de postgres 
+		- daca nu dam calea spre driver obtinem eroare
+		cale_spre_java\java Test
+Clasa de test JDBC
+eroare operatii driver postgres: org.postgresql.Driver
+		- folosim "-cp"
+		- cale_spre_java\java -cp ./;postgresql-42.2.24.jar Test
+		
+	f) schimbam interogarea sql in Test.java si reluam pasii d) si e)
+	- extragem si afisam lista de clienti SILVER
+	-- lista clienti SILVER: select * from client where status='SILVER';

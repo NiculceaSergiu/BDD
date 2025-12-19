@@ -1,0 +1,17 @@
+export const validateBody = (schema) => (req, res, next) => {
+  const { error, value } = schema.validate(req.body, { abortEarly: false, stripUnknown: true });
+  if (error) {
+    return res.status(400).json({ message: 'Validation failed', details: error.details });
+  }
+  req.body = value;
+  return next();
+};
+
+export const validateParams = (schema) => (req, res, next) => {
+  const { error, value } = schema.validate(req.params, { abortEarly: false, stripUnknown: true });
+  if (error) {
+    return res.status(400).json({ message: 'Validation failed', details: error.details });
+  }
+  req.params = value;
+  return next();
+};

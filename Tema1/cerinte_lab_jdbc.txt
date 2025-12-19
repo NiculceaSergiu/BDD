@@ -1,0 +1,104 @@
+------------------
+-1. Exemple JDBC:-
+------------------
+a) fisier atasat (cu sistem/user DSN)
+b) https://alvinalexander.com/blog/post/jdbc/sample-java-jdbc-program-connect-database
+c) https://www.mkyong.com/jdbc/how-do-connect-to-postgresql-with-jdbc-driver-java/
+d) tutorial oficial pe site; https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html
+
+
+https://www.geeksforgeeks.org/difference-odbc-jdbc/
+https://www.postgresql.org/ftp/odbc/versions/msi/
+https://jdbc.postgresql.org/download.html
+
+http://viralpatel.net/blogs/batch-insert-in-java-jdbc/
+https://en.wikipedia.org/wiki/Java_Database_Connectivity
+
+-------------------------
+-2. Tooluri de instalat:-
+-------------------------
+
+PostgreSQL 10 (server + pgadmin)
+Eclipse sau alt IDE pentru Java
+JDK 7
+PostgreSQL ODBC Driver
+Inregistrare user DSN
+Download JDBC driver for PostgreSQL (versiunea)
+
+----------------------------------------------------------------
+-3. Pasii de urmat pentru a rula exemplul din fisierul atasat::-
+----------------------------------------------------------------
+
+1. Instalati JDK 7 (contine JDBC-ODBC Bridge driver)
+2. Instalati PostgreSQL ODBC driver, 64 bit pentru versiunea serverului PostgreSQL la care vreti sa va conectati
+3. In meniul Start cautati "ODBC 64 bit Administrator", sau cu un nume similar
+4. Deschideti ODBC Data Source Manager si pe tabul "User DSN" adaugati un nou "Datasource name" catre o baza de date PostgreSQL. 
+4.1 Dati click pe butonul "Add", selectati din lista driverul "PostgreSQL Unicode(x64)" iar apoi dati click pe butonul "Finish"
+4.2 Se va deschide o fereastra noua in care completati campurile: "Data Source" (acesta va fi DSN-ul), "Database" (baza de date la care vreti sa va conectati), 
+"Server" (IP-ul serverului de baze de date la care vreti sa va conectati), "Port" (portul pe care asculta serverul de baze de date), "User Name" si "Password" 
+- credentialele pe care le folositi pentru a va conecta la serverul de baze de date.
+4.3 Testati conexiunea la serverul de baze de date (butonul "Test")
+4.4 Save
+5. In clasa SimpleSelect actualizati stringul de conectare. Formatul stringului de conectare este: jdbc:odbc:<DSN>, <DSN> este valoarea completata in campul "Datasource Name" la pasul anterior 4.2
+6. Rulati programul folosind JDK 7
+
+--------------------------
+-4. Intrebari/Observatii:-
+--------------------------
+
+Avem nevoie de driverul JDBC la compile time, dar la runtime?
+Cum se obtine o conexiune la baza de date?
+Ce se intampla cand se cheama Class.forName?
+Pot inregistra mai multe drivere?
+Care este formatul stringului de conectare?
+Clasele DriverManager, Connection, Statemenet, PreparedStatement din JDBC API
+Ce facem cu obiectele de tip Connection, Statement, PreparedStatement, ResultSet dupa ce am terminat de lucrat cu ele?
+Tipul java.sql.Connection este thread-safe?
+Exemplu cu ODBC merge si cu JDK 8? Daca nu, de ce?
+
+---------------
+-5. Exercitii:-
+---------------
+
+
+1. Creati un tabel folosind driverul JDBC
+2. Adaugati 1000 inregistrari in tabelul creat
+2.1 Adaugati 1000 inregistrari in tabelul creat folosind pentru fiecare comanda 'insert' o noua conexiune la baza de date
+2.2 Adaugati 1000 inregistrari in tabelul creat folosind o singura conexiune la baza de date pentru toate comenzile 'insert'
+2.3 Adaugati 1000 inregistrari in tabelul creat folosind pachete de comenzi 'insert'
+
+Comparati timpul de executie pentru cele 3 metode de insert
+
+3. Executati o comanda SELECT si scrieti rezultatele intr-un fisier csv
+
+4. Executati o procedura stocata folosind JDBC
+
+5. Creati un proiect Maven si copiati codul dezvolatat las pasii anteriori in acest proiect. Verificati ca programele ruleaza
+
+6. Demonstrati cum functioneaza functia rollback in tranzactii. Se cheama automat functia rollback cand apar exceptii?
+
+7. Dati un exemplu de SQL injection folosind baza de date din proiectul de pe semestrul trecut
+
+8. Aratati ce modificari ar trebui facute pentru a evita SQL injection
+
+9. Transaction isolation levels. Pentru urmatorul scenariu: transfer de bani dintr-un cont in altul pentru un anumit client, ce tip de izolare ati alege? Motivati.
+
+10. Executati o instructiune de actualizare si una de stergere
+
+---------------------
+-6. Linku-uri utile:-
+---------------------
+
+Transaction Isolation Levels
+
+https://docs.oracle.com/javase/tutorial/jdbc/basics/transactions.html
+
+http://elliot.land/post/sql-transaction-isolation-levels-explained
+https://www.postgresql.org/docs/9.5/static/transaction-iso.htm
+http://shiroyasha.io/transaction-isolation-levels-in-postgresql.html
+http://sqlblog.com/blogs/alexander_kuznetsov/archive/2013/12/19/learning-postgresql-fun-with-repeatable-read.aspx
+
+SQL Injection
+
+https://en.wikipedia.org/wiki/SQL_injection
+http://php.net/manual/ro/security.database.sql-injection.php

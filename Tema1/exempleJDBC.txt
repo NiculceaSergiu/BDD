@@ -1,0 +1,5 @@
+Exemple JDBC:
+a) fisier atasat (cu sistem/user DSN)
+b) https://alvinalexander.com/blog/post/jdbc/sample-java-jdbc-program-connect-database
+c) https://www.mkyong.com/jdbc/how-do-connect-to-postgresql-with-jdbc-driver-java/
+d) tutorial oficial pe site; https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html
